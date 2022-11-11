@@ -9,9 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +32,13 @@ class SubjectServiceImplTest {
         Subject newSubject3 = new Subject(3L, "title_new3", "Active");
 
         // act
+        List<Subject> expectedSubjectsList = List.of(newSubject1, newSubject3);
+        Mockito.when(subjectRepository.findByStatus("Active")).thenReturn(expectedSubjectsList);
+
+        List<Subject> result = subjectService.findSubjectByStatus("Active");
 
         // assert
+        assertThat(result).containsAll(expectedSubjectsList);
     }
 
     @Test

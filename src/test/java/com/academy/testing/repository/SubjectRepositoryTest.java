@@ -28,7 +28,7 @@ class SubjectRepositoryTest {
         Subject newSubject3 = new Subject(3L, "title_new3", "Active");
 
         // act
-        subjectRepository.saveAll(Arrays.asList(ndddewSubject1, newSubject2, newSubject3));
+        subjectRepository.saveAll(Arrays.asList(newSubject1, newSubject2, newSubject3));
         List<Subject> resultSubjectList = subjectRepository.findByStatus("Active");
 
         // assert
