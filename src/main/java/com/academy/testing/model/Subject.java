@@ -8,13 +8,12 @@ import java.util.Objects;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Subject {
+public class Subject extends BaseAudit{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
-    private String description;
     private Boolean status;
 
     public Long getId() {
@@ -33,14 +32,6 @@ public class Subject {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Boolean getStatus() {
         return status;
     }
@@ -54,11 +45,11 @@ public class Subject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subject subject = (Subject) o;
-        return Objects.equals(id, subject.id) && Objects.equals(title, subject.title) && Objects.equals(description, subject.description) && Objects.equals(status, subject.status);
+        return Objects.equals(id, subject.id) && Objects.equals(title, subject.title) && Objects.equals(status, subject.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, status);
+        return Objects.hash(id, title, status);
     }
 }

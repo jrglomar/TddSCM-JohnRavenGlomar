@@ -19,37 +19,45 @@ class SubjectRepositoryTest {
 
     @Test
     public void save(){
+        // arrange
         Subject newSubject = new Subject();
         newSubject.setTitle("title_new");
 
+        // act
         Subject savedSubject = subjectRepository.save(newSubject);
 
+        // assert
         assertEquals("title_new", newSubject.getTitle());
         assertNotNull(savedSubject.getId());
     }
 
     @Test
     public void findById(){
+        // arrange
         Subject newSubject = new Subject();
         newSubject.setTitle("title_new");
         Subject savedSubject = subjectRepository.save(newSubject);
 
+        // act
         Optional<Subject> existingSubject = subjectRepository.findById(savedSubject.getId());
 
+        // assert
         assertTrue(existingSubject.isPresent());
         assertEquals("title_new", existingSubject.get().getTitle());
     }
 
     @Test
     public void findAll(){
+        // arrange
         Subject newSubject1 = new Subject();
         Subject newSubject2 = new Subject();
-
         newSubject1.setTitle("new_title1");
         newSubject2.setTitle("new_title2");
 
+        // act
         Iterable<Subject> subjectList = subjectRepository.saveAll(Arrays.asList(newSubject1, newSubject2));
 
+        // assert
         assertThat(subjectRepository.findAll()).containsAll(subjectList);
     }
 
