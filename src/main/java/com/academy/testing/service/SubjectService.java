@@ -3,6 +3,8 @@ package com.academy.testing.service;
 import com.academy.testing.exceptions.RecordNotFoundException;
 import com.academy.testing.model.Subject;
 
+import java.util.List;
+
 public interface SubjectService {
     Iterable<Subject> findAllSubject();
 
@@ -10,7 +12,5 @@ public interface SubjectService {
 
     Subject saveSubject(Subject subject);
 
-    Subject updateSubject(Subject subject, Long id) throws RecordNotFoundException;
-
-    void deleteSubject(Long id) throws RecordNotFoundException;
+    List<Subject> findSubjectByStatus(String status);
 }

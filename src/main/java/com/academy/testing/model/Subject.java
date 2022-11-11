@@ -14,7 +14,16 @@ public class Subject extends BaseAudit{
     private Long id;
 
     private String title;
-    private Boolean status;
+
+    private String status;
+
+    public Subject(){}
+
+    public Subject(Long id, String title, String status) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+    }
 
     public Long getId() {
         return id;
@@ -32,19 +41,18 @@ public class Subject extends BaseAudit{
         this.title = title;
     }
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Subject subject = (Subject) o;
+        if (!(o instanceof Subject subject)) return false;
         return Objects.equals(id, subject.id) && Objects.equals(title, subject.title) && Objects.equals(status, subject.status);
     }
 

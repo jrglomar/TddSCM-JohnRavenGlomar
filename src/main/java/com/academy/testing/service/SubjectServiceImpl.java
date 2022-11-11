@@ -7,6 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
@@ -32,15 +34,8 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Subject updateSubject(Subject subject, Long id) throws RecordNotFoundException {
-        Subject subjectFound = subjectRepository.findById(id).orElseThrow(RecordNotFoundException::new);
-        modelMapper.getConfiguration().setSkipNullEnabled(true);
-        modelMapper.map(subject, subjectFound);
-        return subjectFound;
+    public List<Subject> findSubjectByStatus(String status) {
+        return subjectRepository.findByStatus(status);
     }
 
-    @Override
-    public void deleteSubject(Long id) throws RecordNotFoundException {
-        subjectRepository.delete(subjectRepository.findById(id).orElseThrow(RecordNotFoundException::new));
-    }
 }
