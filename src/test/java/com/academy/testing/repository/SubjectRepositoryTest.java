@@ -1,6 +1,7 @@
 package com.academy.testing.repository;
 
 import com.academy.testing.model.Subject;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,6 +22,10 @@ class SubjectRepositoryTest {
     private SubjectRepository subjectRepository;
 
     @Test
+    @DisplayName("GIVEN subject data " +
+            "WHEN findStatus is executed passing Active as params" +
+            "THEN result should have subject 1 and 3"
+    )
     public void findByStatus(){
         // arrange
         Subject newSubject1 = new Subject(1L, "title_new1", "Active");
@@ -36,6 +41,10 @@ class SubjectRepositoryTest {
     }
 
     @Test
+    @DisplayName("GIVEN newSubject " +
+            "WHEN save is executed passing newSubject as params" +
+            "THEN result should have an id and equals to newSubject"
+    )
     public void save(){
         // arrange
         Subject newSubject = new Subject(1L, "title_new", "Active");
@@ -44,11 +53,15 @@ class SubjectRepositoryTest {
         Subject savedSubject = subjectRepository.save(newSubject);
 
         // assert
-        assertEquals("title_new", newSubject.getTitle());
+        assertEquals(newSubject, savedSubject);
         assertNotNull(savedSubject.getId());
     }
 
     @Test
+    @DisplayName("GIVEN newSubject" +
+            "WHEN findById is executed passing the savedSubject" +
+            "THEN result should find the existing subject and it should be equals"
+    )
     public void findById(){
         // arrange
         Subject newSubject = new Subject(1L, "title_new", "Active");
@@ -59,10 +72,14 @@ class SubjectRepositoryTest {
 
         // assert
         assertTrue(existingSubject.isPresent());
-        assertEquals("title_new", existingSubject.get().getTitle());
+        assertEquals(newSubject, savedSubject);
     }
 
     @Test
+    @DisplayName("GIVEN newSubject1 and newSubject2" +
+            "WHEN find all is executed after saving the subjects data" +
+            "THEN result should contains all of the subjects data"
+    )
     public void findAll(){
         // arrange
         Subject newSubject1 = new Subject(1L, "title_new1", "Active");
